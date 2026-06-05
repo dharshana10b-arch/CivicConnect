@@ -1,0 +1,211 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;700;800&display=swap');
+
+:root {
+  /* Dynamic Mesh / Metallic Fluid Palette */
+  --bg-dark: #070914;
+  --bg-fluid-1: #0f1b4a;
+  --bg-fluid-2: #1e1136;
+  --bg-fluid-3: #123049;
+  
+  /* Accent Colors */
+  --primary: #5271ff;
+  --primary-glow: rgba(82, 113, 255, 0.6);
+  --secondary: #e94560;
+  --secondary-glow: rgba(233, 69, 96, 0.6);
+  
+  /* Glassmorphism Variables */
+  --glass-bg: rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+
+  /* Typography */
+  --font-main: 'Inter', sans-serif;
+  --font-heading: 'Outfit', sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-main);
+  background-color: var(--bg-dark);
+  color: #fff;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+
+@keyframes pageEnter {
+  from { opacity: 0; transform: translateY(20px); filter: blur(10px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+.page-container {
+  animation: pageEnter 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* 
+  Hyper-Realistic Neon Shade Water Background 
+  Colors transition naturally as you scroll down the page.
+*/
+.page-container::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: 
+    radial-gradient(circle at 10vw 10%, rgba(82, 113, 255, 0.35), transparent 60vw),
+    radial-gradient(circle at 85vw 25%, rgba(233, 69, 96, 0.30), transparent 50vw),
+    radial-gradient(circle at 30vw 45%, rgba(138, 43, 226, 0.35), transparent 60vw),
+    radial-gradient(circle at 90vw 65%, rgba(0, 212, 255, 0.30), transparent 55vw),
+    radial-gradient(circle at 15vw 85%, rgba(255, 60, 100, 0.35), transparent 60vw);
+  background-size: 100vw 300vh; /* Extremely tall gradient canvas */
+  background-repeat: repeat-y;  /* Loops seamlessly for infinitely scrolling pages */
+  animation: neonWaterPulse 15s infinite alternate ease-in-out;
+}
+
+@keyframes neonWaterPulse {
+  0% { opacity: 0.8; transform: scale(1); filter: hue-rotate(0deg); }
+  50% { opacity: 1; transform: scale(1.05) translate(-1%, 1%); }
+  100% { opacity: 0.9; transform: scale(1.1) translate(1%, -1%); filter: hue-rotate(15deg); }
+}
+
+/* Glassmorphism Cards */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: 20px;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px 0 rgba(0, 0, 0, 0.5), 0 0 20px var(--primary-glow);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Premium Buttons */
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary), #8a2be2);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px var(--primary-glow);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 50%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  transition: all 0.4s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px var(--primary-glow);
+}
+.btn-primary:hover::after {
+  left: 100%;
+  transition: all 0.6s ease;
+}
+
+.btn-secondary {
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-family: var(--font-heading);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background: rgba(255,255,255,0.15);
+  transform: translateY(-2px);
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, var(--secondary), #ff8a80);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px var(--secondary-glow);
+}
+.btn-danger:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px var(--secondary-glow);
+}
+
+/* Inputs & Forms */
+.sleek-input {
+  width: 100%;
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: white;
+  font-family: var(--font-main);
+  font-size: 15px;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.sleek-input:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--primary);
+  box-shadow: 0 0 15px var(--primary-glow);
+}
+
+.sleek-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* Select */
+.sleek-select {
+  appearance: none;
+  background: rgba(255, 255, 255, 0.05) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/200.svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") no-repeat right 14px center;
+}
+
+.sleek-select option {
+  background: var(--bg-dark);
+  color: white;
+}
+
+/* Gamified Badges */
+.shiny-badge {
+  background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.0));
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
